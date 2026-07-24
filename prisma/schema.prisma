@@ -1,0 +1,45 @@
+// Prisma schema for the Internship Applicant Management API
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  // SQLite is used by default to keep local setup simple.
+  // Swap to "postgresql" or "mysql" and update DATABASE_URL to use another engine.
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+/// Administrator accounts. Only admins can authenticate and manage applicants.
+model Admin {
+  id           String   @id @default(uuid())
+  email        String   @unique
+  passwordHash String
+  name         String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("admins")
+}
+
+/// Internship applicants submitted for review by administrators.
+model Applicant {
+  id          String    @id @default(uuid())
+  fullName    String
+  email       String    @unique
+  phone       String?
+  track       String    // Changed from InternshipTrack enum to String
+  status      String    @default("PENDING") // Changed from ApplicationStatus enum to String
+  resumeUrl   String?
+  coverLetter String?
+  notes       String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  deletedAt   DateTime?
+
+  @@index([status])
+  @@index([track])
+  @@index([deletedAt])
+  @@map("applicants")
+}

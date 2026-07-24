@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  api:
+    build: .
+    container_name: internship-applicant-api
+    ports:
+      - '3000:3000'
+    environment:
+      PORT: 3000
+      NODE_ENV: production
+      DATABASE_URL: 'file:./dev.db'
+      JWT_SECRET: 'replace-with-a-long-random-secret-string'
+      JWT_EXPIRES_IN: '1d'
+      SEED_ADMIN_EMAIL: '[email protected]'
+      SEED_ADMIN_PASSWORD: 'ChangeMe123!'
+      SEED_ADMIN_NAME: 'System Administrator'
+    volumes:
+      - api-data:/usr/src/app/prisma
+
+volumes:
+  api-data:
