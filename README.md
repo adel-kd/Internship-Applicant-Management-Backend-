@@ -12,16 +12,17 @@ to PostgreSQL/MySQL), **JWT** bearer authentication, and **Swagger/OpenAPI** doc
 ## Table of contents
 
 1. [Technologies used](#technologies-used)
-2. [Project structure](#project-structure)
-3. [Setup instructions](#setup-instructions)
-4. [Migrations and seed data](#migrations-and-seed-data)
-5. [Authentication](#authentication)
+2. [Visual Previews ](#Visual-Previews)
+3. [Project structure](#project-structure)
+4. [Setup instructions](#setup-instructions)
+5. [Migrations and seed data](#migrations-and-seed-data)
+6. [Authentication](#authentication)
 6. [API overview](#api-overview)
-7. [Business rules](#business-rules)
-8. [Architecture](#architecture)
-9. [Testing](#testing)
-10. [Docker](#docker)
-11. [Assumptions and known limitations](#assumptions-and-known-limitations)
+8. [Business rules](#business-rules)
+9. [Architecture](#architecture)
+10. [Testing](#testing)
+11. [Docker](#docker)
+12. [Assumptions and known limitations](#assumptions-and-known-limitations)
 
 ---
 
@@ -37,6 +38,23 @@ to PostgreSQL/MySQL), **JWT** bearer authentication, and **Swagger/OpenAPI** doc
 | API docs             | `@nestjs/swagger` (OpenAPI 3)             |
 | Testing              | Jest (unit) + Supertest (e2e)             |
 | Config               | `@nestjs/config` (`.env` based)           |
+
+
+
+## Visual Previews
+
+### 1. Interactive Swagger Documentation (`/api/docs`)
+Explore and test all endpoints directly through the interactive Swagger UI sandbox:
+![Swagger UI](./assets/swagger-ui.png)
+
+### 2. Database Management via Prisma Studio
+Inspect and manage database models, entities, and relationships visually:
+![Prisma Studio](./assets/prisma-studio.png)
+
+### 3. API Testing & Authentication
+Verify requests using an authenticated Bearer token workflow:
+![API Test Client](./assets/postman-request.png)
+
 
 ## Project structure
 
@@ -132,7 +150,7 @@ The seed script (`prisma/seed.ts`) is **idempotent** (uses `upsert` on unique
 emails), so it's safe to run more than once. It creates:
 
 - One administrator account, using `SEED_ADMIN_EMAIL` / `SEED_ADMIN_PASSWORD`
-  / `SEED_ADMIN_NAME` from `.env` (defaults: `[email protected]` /
+  / `SEED_ADMIN_NAME` from `.env` (defaults: `admin@example.com` /
   `ChangeMe123!` if unset).
 - Six sample applicants spread across all five tracks and all four statuses.
 
